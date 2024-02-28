@@ -28,18 +28,17 @@ default door = False
 default city_info = False
 default menuset = set()
 
-image bg choose_character = "images/choose_character.jpg"
-image bg your_character_m = "images/your_character_m.jpg"
-image bg your_character_w = "images/your_character_w.jpg"
-image bg enter_yes_no = "images/enter_yes_no.jpg"
-image bg enter_yes_no = "images/enter_yes_no.jpg"
-image bg cave = "images/cave.jpg"
-image bg city_poppy = "images/city_poppy.jpg"
-image bg no_cave = "images/no_cave.jpg"
+image bg choose_character = "images/choose_character.png"
+image bg your_character_m = "images/your_character_m.png"
+image bg your_character_w = "images/your_character_w.png"
+image bg enter_yes_no = "images/enter_yes_no.png"
+image bg cave = "images/cave.png"
+image bg city_poppy = "images/city_poppy.png"
+image bg no_cave = "images/no_cave.png"
 image bg game_over = "images/game_over.jpg"
-image bg poppy_f = "images/poppy_f.jpg"
-image bg choose_direction = "choose_direction.jpg"
-image bg city_r = "images/city_r.jpg"
+image bg poppy_f = "images/poppy_f.png"
+image bg choose_direction = "choose_direction.png"
+image bg city_r = "images/city_r.png"
 image bg city_le = "images/city_le.jpg"
 image bg city_str = "images/city_str.jpg"
 image bg outsk_house = "images/outsk_house.jpg"
@@ -669,13 +668,13 @@ label Mayor_Child_Choice:
 
 label Basement_Death:
     menu:
-    "Oppose":
-        "You try to resist, but you are too weak compared to them. "
-        scene bg go_basement
-        "They locked you in an isolated room in the basement and started releasing some kind of gas into the room. After a while, you began to choke, your lungs were on fire and your mind was going blank...You left this place... taking a one-way ticket out of city, but its price was your life"
-        
-        "THE END"
-        jump try_again_or_give_up
+        "Oppose":
+            "You try to resist, but you are too weak compared to them. "
+            scene bg go_basement
+            "They locked you in an isolated room in the basement and started releasing some kind of gas into the room. After a while, you began to choke, your lungs were on fire and your mind was going blank...You left this place... taking a one-way ticket out of city, but its price was your life"
+            
+            "THE END"
+            jump try_again_or_give_up
 
 
 
