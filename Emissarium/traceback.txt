@@ -1,0 +1,51 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 100, in script call
+    call reset_game
+  File "game/script.rpy", line 165, in script call
+    call Cave("")
+  File "game/script.rpy", line 445, in script
+    "[Mayor_Child] told you a lot about other people, but you started to get curious about [pronoun_1] personality. So you try to find more about [pronoun_3]."
+NameError: Name 'Mayor_Child' is not defined.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 100, in script call
+    call reset_game
+  File "game/script.rpy", line 165, in script call
+    call Cave("")
+  File "game/script.rpy", line 445, in script
+    "[Mayor_Child] told you a lot about other people, but you started to get curious about [pronoun_1] personality. So you try to find more about [pronoun_3]."
+  File "/home/mada/renpy-8.2.0-sdk/renpy/ast.py", line 2557, in execute
+    Say.execute(self)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/ast.py", line 615, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/exports.py", line 1493, in say
+    who(what, *args, **kwargs)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/character.py", line 1376, in __call__
+    what = self.prefix_suffix("what", self.what_prefix, what, self.what_suffix)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/character.py", line 1290, in prefix_suffix
+    return (sub(prefix) + sub(body) + sub(suffix))
+  File "/home/mada/renpy-8.2.0-sdk/renpy/character.py", line 1270, in sub
+    return renpy.substitutions.substitute(s, scope=scope, force=force, translate=translate)[0]
+  File "/home/mada/renpy-8.2.0-sdk/renpy/substitutions.py", line 368, in substitute
+    s = interpolate(s, kwargs) # type: ignore
+  File "/home/mada/renpy-8.2.0-sdk/renpy/substitutions.py", line 86, in interpolate
+    raise e
+  File "/home/mada/renpy-8.2.0-sdk/renpy/substitutions.py", line 78, in interpolate
+    value = renpy.python.py_eval(code, {}, scope)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "/home/mada/renpy-8.2.0-sdk/renpy/python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+  File "/home/mada/renpy-8.2.0-sdk/renpy/substitutions.py", line 310, in __getitem__
+    raise NameError("Name '{}' is not defined.".format(key))
+NameError: Name 'Mayor_Child' is not defined.
+
+Linux-6.6.10-76060610-generic-x86_64-with-glibc2.35 x86_64
+Ren'Py 8.2.0.24012702
+Emissarium 1.0
+Tue Feb 27 01:30:27 2024

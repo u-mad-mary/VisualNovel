@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 417: choice menuitem expects a non-empty block.
+    "Leave":
+            ^
+
+Ren'Py Version: Ren'Py 8.2.0.24012702
+Mon Feb 26 03:02:02 2024
