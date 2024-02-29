@@ -3,16 +3,21 @@
 # # Declare characters used by this game. The color argument colorizes the
 # # name of the character.
 
-define w = Character('Woman', color="#c8ffc8")
-define m = Character('Man', color="#72bbdd")
+define w = Character('Woman', color="#c8ffc8") # the mom from the right triope
+define m = Character('Man', color="#72bbdd") # the dad from the right triope
 define y = Character('You', color = "#9b689d")
-define mcb = Character('Young man', color = "#5a70dd")
-define mcg = Character('Young lady', color = "#e24be2")
+define mcb = Character('Young man', color = "#5a70dd") # the mayor's son
+define mcg = Character('Young lady', color = "#e24be2") # the mayor's daughter
 define my = Character("Mayor", color = "#b64e1e" )
-define om = Character("Old man", color = "#b64e1e")
-define mn_r = Character("The Man", color = "#7f7773")
-define muz_man = Character("The Man", color = "#debf59")
-define cr = Character("Creepy Man", color = "#75524d")
+define om = Character("Old man", color = "#b64e1e") # lonely man, old from the outskirts of the city
+define mn_r = Character("The Man", color = "#7f7773") # the man from the right trope
+define muz_m = Character("The Man", color = "#debf59") # the museum's owner
+define cr = Character("Creepy Man", color = "#75524d") # the mayor's helper
+define pn = Character("Painter", color = "#505389") # painter from left trope
+define sw = ("Woman", color ="#721572") # woman from left trope (sales food), is very nice
+define am =("Man", color ="#778fbd")  # another man (is worried)
+define aw = ("Woman", color ="#ac7eac") # another woman (is worried)
+
 
 default sex = 0
 default knowledge = 0
@@ -182,7 +187,8 @@ label City:
     scene bg choose_direction
     "You have looked in the face of every passing citizen and on each ones face you have seen a smile, everyone looked so happy that it makes you alarmed. How can a city exist inside a mountain? And how it can be so prosperous? It makes no sense. "
     "In order to explore the city and find more about it choose where to go."
-    menu:
+    menu City_Directions:
+        set menuset
         "Right":
             scene bg city_r
             "You decided to turn right."
@@ -194,7 +200,7 @@ label City:
         "Straight":
             scene bg city_str
             "Going straight ahead, you find a path that leads to the outskirts of the city."
-            jump outskirts
+            jump Outskirts
 
 label City_Right:
     "Here you see a couple who tries to calm down their crying child, a man with a blank look in his red eyes and a path to the museum (pointed by a signpost)."
@@ -208,12 +214,140 @@ label City_Right:
             jump Talk_To_The_Man_R
 
         "Go to the museum":
-            jump Go_To_The_Museum
-
-            
+            jump Go_To_The_Museum        
     
 
-            ######### HERE
+label Left:
+    scene bg city_le
+    "You walked on the left road."
+    scene bg choice_city_left
+    "Here you see a woman who sells different types of food, she looks very lively and talks actively with other people." 
+    "On the other hand there is a painter with a sad expression on his face. He draws children who play in front of a flower shop."
+    
+    menu left_trope:
+        set menuset
+        "Talk to the woman":
+            scene bg sales_w
+            
+            show sw 
+            sw "Hey, dear, I haven’t seen a new face on these humble streets in about 40 years! How did you get here? Want to taste something? (points at the table with the food)"
+            
+            show y 
+            y "Actually, I would ask you about something."
+
+            show sw 
+            sw "(cheerful) You came to the right place! Feel free to ask anything. This woman knows everything about everybody in this city, what food everyone likes ,who dates who and I even know about the secret affairs of some respectable misters and ladies. (winks)"
+
+            "This woman looks like a typical chirper who spends her time gossiping about every passing ant in her way."
+
+            menu woman_dialog:
+                set menuset
+                "What do you want to ask about?":
+                    show y 
+                    y "I would like to find more about the city."
+                    
+                    show sw 
+                    sw "Well, it's quite simple, we live here for the past 4-5 generations, people here are friendly and work for the prosperity of their home."
+                    
+                    menu:
+                        "Ask how did the city become so prosperous":
+                            show y 
+                            y "How did the city become so prosperous while being isolated from the outside world?"
+
+                            show sw 
+                            $ knowledge += 1
+                            sw "Well, here we have our own small world.(laughts) It's not that hard to make a city prosperous when every citizen contributes to it. But if you want to know more about the history of this city you could go to the museum and ask the man from there. Or if you want to find more from the perspective of somebody who came here like you, then you could visit the man from the outskirts."
+
+                            menu:
+                                "Could you tell me how can I get to the museum?":
+                                    $ alertness += 1
+                                    show sw
+                                    sw "Sure, go to the main square and turn right, there you will see a waymark."
+                                    jump City_Directions
+                                
+                                "Could you tell me how can I get to the outskirts?":
+                                    $ alertness += 1
+                                    "Sure, go to the main square and go straight to the norhern path, at its end you will se the old man's house."
+                                    jump City_Directions
+
+                        "What would you recommend for me to eat?":
+                            scene bg choice_food
+
+                            "The woman recommends you her special tea, apples and a pice of a pie. You can choose only one type."
+
+                            menu:
+                                "I will drink some tea.":
+                                    scene bg tea 
+                                    "The woman gives you a cup of tea."
+                                    "It tastes wonderful, almost as if you drank sunshine, it warmed you from the inside. Its aftertaste was close to a mixture of mint and daisies."
+
+                                "I will take an apple":
+                                    scene bg apple
+                                    $ apples = True 
+                                    "The woman gives you some apples. You look at her inquiringly."
+                                    
+                                    show sw 
+                                    sw "One is for you and other ones are for the friends that you will make here.(winks)"
+                                    "You take the apples and taste one. It was very sweet and juicy, you have never eaten such apples."
+
+                                "I would like to try the pie.":
+                                    scene bg food 
+                                    "  The woman gives you a piece of the pie. You take a bite and it's delicious. It was an apple pie like you've never eaten before, very flavorful and crispy."
+
+                            show y 
+                            y "Thank you. How much do I owe?"
+
+                            show sw 
+                            sw "Oh, you mean money? "
+
+                            show y 
+                            y "Yes..."
+
+                            show sw 
+                            sw "I think I have heard from the old man about such stuff existing in the outside world... Well, we don't have it here, everyone just does his/her work! So just enjoy your meal."
+                            "That was surprisingly nice, but you could not understand how a city can function normally without a monetary system and only on the conscience of people."
+
+                            $ knowledge += 1
+
+                            show y 
+                            y "Could you tell me how can I get to the outskirts?"
+
+                            show sw 
+                            sw "Sure, go to the main square and go straight to the norhern path, at its end you will se the old man's house."
+
+                            jump City_Directions
+
+        "Talk to the painter":
+            scene bg painter
+            show y
+            y "Hello, Mister, I would like to ask you some questions, are you free? (smiling politely)"
+            show pn
+            pn "As you can see, I am painting right now."
+
+            "You try to find another approach to get him to talk, so you ask about the painting."
+
+            show y 
+            y "Would you mind to share something about your painting?"
+
+            show pn
+            pn "As you see, I paint the children… Naive and happy children…Who welcome every morning with a bright smile on their faces and don’t now anything about the misery of this world, I wonder if they even know the meaning of the word \“misery\”. (laughs bitterly)"
+            
+            show y 
+            y "But children are supposed to be protected from such things, don’t you think so?"
+
+            show pn 
+            pn "There is truth in your words. But what would you say if the tears of one child brings the joy to everyone else?"
+
+            show y
+            y "I don’t think that a crying child can be a cause for joy."
+
+            show pn 
+            pn "(sights) Well, believe me or not but it turns out like that."
+
+            "You wanted to ask him more questions, but it seemed like a bad idea, so you decided to find answers to your questions elsewhere."
+            jump right_trope
+
+            
 
 label Talk_To_The_Parents:
     scene bg parents_child
@@ -262,7 +396,7 @@ label Go_To_The_Museum:
     "You enter the building and see the owner of the museum."
     menu:
         "Speak with the owner":
-            scene bg muz_man
+            scene bg muz_m
             show y 
             y " Hello, I suppose that I got to the right place to ask questions about this city?"
             show muz_m
@@ -276,6 +410,7 @@ label Go_To_The_Museum:
                 "Ask if the city has some legends":
                     $ knowledge +=2
                     jump Muz_Owner
+
 
 label Muz_Owner:
     show muz_m
@@ -292,9 +427,13 @@ label Muz_Owner:
             show y 
             y "Why the young brother did not become the mayor?"
             "Well, because he had his own duty in order to contribute to the well being of the citizens. You could ask more about it from the mayor directly, he knows more about his family."
-
-
-
+            
+            menu:
+                "How can I find the mayor?":
+                    show muz_m
+                    muz_m "Exit the museum and go right to the end of the street, there you will see the mayor's residence. Hmmm...Also you could go to the north outskirts by going stright from the main square if haven't visited it before."
+                    
+                    jump City_Directions
 
 label Mayor_House:
     scene bg mayor_house
@@ -398,7 +537,7 @@ label mayor_child_dialog:
                         "The interior of the mayor's residence is beautiful both outside and inside. The floor is covered with expensive decorative tiles, the stairs are carved from mahogany, and the chairs in the hall are upholstered in high quality fabric. You wonder where he got all these materials from in such an isolated place. "
                         "[mayor_child] doesn't come for a long time."
 
-                        menu:
+                        menu see_house:
                             "Take a look around":
                                 scene bg stay_examine
                                 menu:
@@ -427,14 +566,71 @@ label mayor_child_dialog:
                                                         " Mayor's words caught you off guard, but you need to make a choice."
                                                         jump Make_Choice
 
-                                                
+
+                                    "Examine the first floor":
+                                        scene bg examine
+                                        "You move into the next room. Here you can see no less rich interior, everything is made of quality materials and with good taste. Moving around you start to hear some noises coming from a hall, you coome closer to it."
+
+                                        menu:
+                                            "Proceed to move in the hall's direction":
+                                                scene bg proceed
+                                                "You hear some muffled sounds from this direction. You got scared, but your legs are moving on your own to it."
+                                                $ knowledge += 1
+
+                                                "You see that this hall has a way down to a basement, the noises come from there."
+
+                                                menu:
+                                                    "Go back to the central hall":
+                                                        "You decide to go back to the central hall in order to avoid possible trouble."
+
+                                                    "See where the noise is comming from":
+                                                        scene bg go_basement
+                                                        "The noises stopped, but after a few seconds they got louder."
+
+                                                        menu:
+                                                            "Go down to the basement":
+                                                                $ alertness += 2
+
+                                                                "The mayor's child takes you by surprise ."
+
+                                                                show char
+                                                                char "What are you looking for? (smiling)"
+
+                                                                menu:
+                                                                    "Make up an excuse":
+                                                                        show y 
+                                                                        y  " Oh, I was just walking...You have a very nice house."
+
+                                                                        show char 
+                                                                        char "Thanks, let's go meet the mayor, he's waiting for us in the lobby. "
+
+                                                                    "Ask why there are noises coming out of the basement.":
+                                                                        "You look in the direction of the basement."
+
+                                                                        show y 
+                                                                        y "What is in there? It sounds awful."
+
+                                                                        show char 
+                                                                        char "Oh...there are rats."
+
+                                                                        "A new wave of sounds is heard from the basement."
+
+                                                                        show char 
+                                                                        char "Many rats..."
+
+                                                                        "On [pronoun_1] face appeared an imprint of sadness."
+
+                                                                        show char 
+                                                                        char " Let's go to the lobby, the mayor is waiting for us."
+
+                                                                        $ alertness += 1
+
+                                                                        jump  see_house
 
 
-
-                                    # "Examine the first floor":
-
-
-                                    # "Go back to the central hall":
+                                    "Go back to the central hall":
+                                        "You decide to go back to the central hall in order to avoid possible trouble."
+                                        jump see_house
 
 
 label Find_More_Mayor_Child:
@@ -550,15 +746,136 @@ label Enter_Mayor_Child_Room:
                                                             char " You know...her remains are somewhere in the field, she just wanted to leave and did nothing wrong...(sobs) But she couldn't, even after her death she still here..."
 
                                                             menu:
-                                                                "Help [pronoun_3] leave": ####
+                                                                "Help [pronoun_3] leave":
                                                                     $ romantic += 1
-                                                                    menu: 
-                                                                        "Tell that [pronoun_1] has great painting skills":
-                                                                            jump Painting_Skills
-                                    
+                                                                    "Then the [mayor_child] tells you about a child that is the \"saviour\" of this city, the descendant of the hero that founded this city and a relative of [pronoun_1]."
+                                                                    "In reality he is a scapegoat, the name of our city \"Emissarium\" tells directly about this roots."
+                                                                    show y
+                                                                    y " Where is he now?"
+                                                                    show char
+                                                                    char "He is in the basement...All his life he was treatened miserably, because some dumb creature said that the sacrifice must suffer lonlyness and all kind of mistreats in order to keep the prosperity of this city at least one soul shows mercy to him, then the city will turn into ruins...So everybody knows about him but don't dare to help him someway. There are people who could not stand the fact that they live off someone else's suffering and leave the city ... "
+                                                                    jump Save_Child
+                                else:
+                                    show y 
+                                    y "How can we help this child?"
+                                    show char 
+                                    char "There is a key to the basement in the drawer of the mayor's desk. So we need to sneak in and take this key, then arond the midight all the three of us will leave."
+                                    "You nod."
+                                    show char 
+                                    char "But we need to be very careful if my father finds out what we are plannig it will be the end for the both of us."
+                                    jump Save_Child
+                    
+                    else:
+                        jump Painting_Skills
 
-                    ######## ADD HERE IF NOT MUSEUM
                       
+label Save_Child:
+    scene bg saveKid_sleep
+    menu:
+        "Save the child":
+            show y
+            y "How can we save him?"
+            show char
+            char "We need to go to my father's office and steal the key to the basement."
+            
+            "You both sneak into the mayor's office."
+            scene bg desk
+
+            "You start to search for the key and your companion helps you with that, finally you found it in the mayor's desk."
+            ### HERE CAN BE A GAME ###
+
+            menu:
+                "Change your mind and don't save the child":
+                    show y 
+                    y "I don't really think that I can help you with it, sorry."
+                    jump Become_Scape_Goat
+
+                "Take the key":
+                    scene bg key
+                    "You take the key and run to the basement to save the child."
+                    jump Take_Child
+       
+        "Don't save the child":
+            show y 
+            y "You, know...I don't think that I can help you with it, sorry."
+            jump Become_Scape_Goat
+
+label Take_Child:
+    scene bg go_basement
+    "You opened the door, an awful smell hit your nose. The room was small, it has the size of a mop closet. You see a little child lying on its floor, he is malnourished and looks very week."
+    
+    scene bg basement
+    "You try to get him to his senses."
+    
+    show y
+    y "Wake up!...Can you here me?"
+    "The child opens his eyes. They are blank as if the will to leave left this small body of him."
+    "You ask the [mayor_child] where you can wash yp this kid and [pronoun_2] escorts you to the bathroom." 
+    "The water got black in an instant after washing him a bit, all his body was full of sores and skin irritations."
+    "You feel awful when you realise that the people to whome you talk before knew about the conditions in that lived this child and how they did not do anything."
+    
+    "The [mayor_child] brings some clothes for the child."
+
+    if (romantic >= 8): # Leave the city
+        "As soon as three of you exit the house an earthquake starts. The mayor's child helps you to pass unnoteced through the city so you could leave."
+        "You came to the entrance of the cave from where you came from and turn around for the last time." 
+                
+        scene bg ruins
+        "The city is in ruins..."
+        
+        "Well, you don't really have any remorse about doing this...It's wrong to build happiness on someone else's grief."
+        "You go through the cave and leave this city forever with the child and the [mayor_child]."
+        "THE END"
+
+        jump try_again_or_give_up
+
+    else:
+        # Leave the city child
+        "As soon as three of you exit the house an earthquake starts. The mayor's child helps you to pass unnoteced through the city so you could leave."
+        "You came to the entrance of the cave from where you came from and turn around for the last time."   
+        "The city starts to ruin..."
+
+        show char 
+        char "I hope you both will have a nice journey..."
+
+        show y
+        y "What about you? Did you not want to leave?"
+
+        show char 
+        char "I don't deserve it..."
+
+        "The [mayor_child] runs back to the city."
+        "You feel sad, but now you have a life in your hands and you need to take responsability for saving this child..."  
+        "You look one more time at the city...It is in ruins..."
+
+        scene bg ruins
+
+        "You hear screams coming out from the city...but you don't really have any remorse about doing this...It's wrong to build happiness on someone else's grief."  
+        "You go through the cave and leave this city forever with the child in your hands."
+
+        "THE END"
+
+        jump try_again_or_give_up
+
+
+label Become_Scape_Goat:
+    "[mayor_child] turned blue of sadness."
+    scene bg sofa_2
+    "You go back and lay on the sofa, soon you fall asleep."
+
+    scene bg basement
+    "You open your eyes and all that you see is darkness also there is an awful smell in the air. You try to stand up and you body feels strange...It is smaller and thinner...It's as if you got to a size of a child."
+    "For a moment you tought that it is a nightmare, but it felt to real. You start to scream and hit the walls, then you find the door and punch it with your week hands, but got tired very fast and your voice became broken..."
+    "You could not say any words just some weird mumbling came out of your mouth."
+    "You feel helpless."
+
+    "Few moments later you hear some steps, you started to hit the door harder in order to be heard. Then you heared a voice from afar \" What are you looking for?\", you hit again, but the sounds of steps were getting quiter and our hopeless rises with each step."
+    "You spent a few days in this state, nobody came...Sometimes when you wake up you find a piece of bread on the floor and some wate, but it is not sufficient to feed you up, you are malnutricioned, lonely and broken hearted...You wander if you got in this condition because you refused to save the child back then..."
+    "The days passed, or maybe months or event years...You don't really know, because you started to lose your senses one before another..."
+    "You don't feel alive, you just...exist..."
+
+    "THE END"
+    jump try_again_or_give_up
 
 label Painting_Skills:
     show y 
@@ -619,9 +936,13 @@ label Painting_Skills:
 label Mayor_Child_Choice:
     menu:
         "Help [pronoun_3] to leave":
+            $ romantic += 1
             show y
             y "Yes, I will help you."
             "The mayor's child looks at you with a grateful gaze."
+
+            "Then the [mayor_child] tells you about a child that is the \"saviour\" of this city, the descendant of the hero that founded this city and a relative of [pronoun_1]. In reality he is a scapegoat, the name of our city \"Emissarium\" tells directly about this roots."
+            jump Save_Child
         
         "Tell that the outside world is crueler":
             $ romantic -= 6
@@ -660,9 +981,11 @@ label Mayor_Child_Choice:
                                                            
                             menu:
                                 "Stand up":
+                                    "You stood up."
                                     jump Basement_Death
 
                                 "Stand still":
+                                    "You stayed still."
                                     jump Basement_Death   
 
 
@@ -675,12 +998,6 @@ label Basement_Death:
             
             "THE END"
             jump try_again_or_give_up
-
-
-
-
-
-            
 
 
 label Make_Choice:
@@ -775,9 +1092,12 @@ label Agree_Stay:
         scene bg goutsk_sofa_armchair
         menu:
             "Sleep on the sofa":
-                scene bg sofa #####
+                scene bg sofa
+                jump What_Is_Happening
+
             "Sleep in the armchair":
-                scene bg arm #####
+                scene bg arm
+                jump What_Is_Happening
     else:
         "You got escorted by the mayor's child to the guest room and [pronoun_2] wishes you good night. You felt tired from walking all the way, so you fell asleep as soon as your head hit the pillow."
         "Next day, the [mayor_child] accompanied you to the outskirts where you saw a nice house near the mountains. "
@@ -857,39 +1177,300 @@ label Agree_Stay:
         jump try_again_or_give_up
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-label City_Left(dialogue=""):
-    if dialogue == "":
-        "Here you see a woman who sells different types of food and a painter with a sad expression on his face."
-        # Assuming interactions or choices would be placed here
-    return
-
-label outskirts:
+label Outskirts:
     "After some time you find a house near the mountains."
-    if not mountain_house_visited:
-        jump old_man_visited
-    else:
-        "This path leads to the old man's house. He won't tell me anything else anymore."
-        menu:
-            "Go back":
-                jump City
+    scene bg outsk_house
+    $ alertness += 1
+    "You come closer to its door."
+    scene bg door
+    "You knocked the door. It was opened by old man in his 70s. He looks at you surprised."
 
-label old_man_visited:
-    "You've already visited the old man. It seems he has nothing more to tell you."
-    $ mountain_house_visited = True
-    jump City
+    show om
+    om "How can I help you?"
+
+    scene bg outsk_man
+    menu:
+        "Ask the man about the city":
+            $ knowledge += 1
+            show y 
+            y "Hello, sorry to disturb you. I came to this city recently, so I don't know anything about it, could you answer a few questions about the city?"
+            show om 
+            om "(grumply) You came to the wrong place, especially if you are a softie. Listen to this old man and leave the city till it's not too late or at least try to not stick your nose in other people's business."
+
+            "You were puzzled by his words."
+
+            menu:
+                "Leave old man's house":
+                    "You go back to the city."
+                    jump City_Directions
+                
+                "Ask why he lives in the outskirts":
+                    $ knowledge += 1
+                    "You decided to be insistent and ask him at least one question."
+
+                    show y 
+                    y "Why do you live in the outskirts? People from here seem friendly and the city is nice too."
+
+                    "The old man sights."
+
+                    show om 
+                    om "Come in."
+
+                    "You enter the man's house."
+                    scene bg outsk_sofa_armchair
+
+                    "He invites you to sit down in the armchair. It is pretty comfortable."
+
+                    show om
+                    om " I see you are the type who doesn't leave until you get what you want."
+
+                    "You smile politely."
+
+                    show om 
+                    om "Well, listen to my story, youngster. As you I was not born here. I came to the city around 40 years ago when the Cold War showed its economical impact on the civils and the inflation begun. I had a small business, but due to the circumstances I got bankrupt. My wife left me with nothing... I had nowhere to go so I was wondering in the mountains to find my death, but I was lucky...or may be not to find this wonderful city.(smiles bitterly) It became my home, the mayor's father let me live here if I ...help people who wants to leave this city to pass the mountains."
+
+                    menu:
+                        "Ask why he helps":
+                            show y
+                            y "But, why do you help them?"
+
+                            show om 
+                            om "Because that's the only reason the mayor's father let me live here. Nice house, right? (chuckles) Also, the people of this city are very... sensitive about its privacy. I think you have already understood that this is a good place to live, so if other people find out about this city, it will cause a mess. A HUGE mess."
+
+                        "Ask why people want to leave":
+                            $ knowledge += 1
+
+                            show y 
+                            y "But why someone would leave this wonderful place?"
+                            
+                            show om 
+                            om "Some things are better to be left unknown. I strongly advise you to not look into this matter. Also, the mayor will be displeased if you start to interogate all the people of this city."
+
+                            "It is not the answer you wanted to hear."
+
+                            menu:
+                                "Insist":
+                                    $ knowledge += 1
+                                    $ alertness += 1
+
+                                    show y 
+                                    y "It's not the answer to my question."
+
+                                    show om 
+                                    om "I will tell you just one thing. All of them had soft hearts and have seen something they shouldn't have in order to live here without remorse."
+
+                                    menu:
+                                        "What have they seen?":
+                                            show om 
+                                            om "I already told you too much."
+
+                                            if (museum = True):
+                                                $ alertness += 1
+
+                                                show y
+                                                y "Is it related to the story told by the museum's owner?"
+
+                                                show om 
+                                                om "I see, you spoke with that bigmouth. Yes, it is related to the legend, but I can't tell you more."
+
+                                                menu: 
+                                                    "I want to get answers":
+                                                        $ alertness += 1
+                                                        show y 
+                                                        y "I want to get the answers to my questions and if you or the other citizens won't tell me, then I will ask the mayor directly."
+
+
+                                            
+                                            else:
+                                                menu:
+                                                    "Ask why he decided to stay here":
+                                                        $ alertness += 1
+                                                        show y 
+                                                        y "Why did you decide to stay here if you speak so badly about this place?"
+
+                                                        show om 
+                                                        om "Obviously, because I had nowhere to go..."
+
+                                                        menu:
+                                                            "I am sorry":
+                                                                show y 
+                                                                y " I am sorry that you had to go through all this, but I really want to know more about this city."
+
+                                                                show om
+                                                                om "...Go to the town square and turn right, there you will se the building at the end of the street. Go right there and maybe you will find them."
+
+                                                                jump Mayor_House
+                                                            
+                                                            "I understand and I will leave the city":
+                                                                show y 
+                                                                y "I understood and I'll follow your advice."
+
+                                                                show om
+                                                                om "(joyful) This is a very wise decision. You could stay overnight and leave the city tomorrow morning, take this as a thank you for listening to this old man. Make yourself comfortable."
+
+                                                                scene bg outsk_sofa_armchair                                        
+                                                                jump Stay_The_Night_Outskirts                     
+
+
+                                                # CHECK IF THE PEREHOD WORKS
+
+
+                                            menu:
+                                                "Tell him that you will find out":
+                                                    show y 
+                                                    y "Well, I think that in this city I will find someone who would answer my questions honestly."
+
+                                                    show om 
+                                                    om "It is a really bad ideea...Don't bother the citizens, ask the mayor directly all the questions reqarding the city, he is the only one who could provide you information...If he wants."
+
+                                                    show y 
+                                                    y "Where I can find him?"
+
+                                                    show om 
+                                                    om "Go to the town square and turn right, there you will se the building at the end of the street. Go right there."
+
+                                                    jump Mayor_House
+
+
+label Stay_The_Night_Outskirts:
+    menu:
+        "Sleep on the sofa.":
+            "You chose to sleep on the sofa."
+            scene bg sofa
+            "In the middle of the night you wake uo because someone knocks on the door."
+            jump Open_Door
+        
+        "Stay awake on the armchair":
+            scene bg arm
+            "Someone knocks on the door."
+            jump Open_Door
+
+label Open_Door:
+    scene bg door_ins
+    menu:
+        "Stand up and open the door":
+            $ door = True
+            "Opening the door, you see a woman and a man with very sad and worried expressions on their faces."
+
+            menu: 
+                "Ask how can you help them":
+                    show y 
+                    y "Could I help you with something?"
+
+                    "They wanted to tell you something, but the old man comes behind you and invites them inside to an another room."
+
+                    show am 
+                    am "We saw it..."
+
+                    "The man holds the woman's hand."
+
+                    menu:
+                        "Listen closer":
+
+                    show am 
+                    am "We need to leave as fast as possible..."
+
+                    show aw 
+                    aw "(crying) How could they treat a child like this?(sobs) How could all these people live without remorse after seeing how miserable it...he is treated?!"
+
+                    show om 
+                    om "Calm down for a little bit, we are not alone..."
+
+                    "The couple looks at you and become silent. The house's owner addresses to you."
+
+                    show om 
+                    om "I will go out for a while, to help them leave. You can go with me."
+
+                    "You four go to a cave not far away from the man's house, the couple enters the cave."
+
+                    show om 
+                    om "I will escort them to the exit, you can take care of yourself till my return."
+
+                    menu:
+                        "Ask if you should go with them":
+                            show y 
+                            y "Shouldn't I go with you now in order to leave the city?"
+
+                            show om 
+                            om "No. You will leave tomorrow's morning through the path you entered here."
+
+                            menu:
+                                "Go to the festival":
+                                    show y 
+                                    y "I will go to the festival and then come back."
+
+                                    show om
+                                    "Fine, take care to not get into trouble."
+
+                                    "You go back to the city to enjoy the festival before you take your leave."
+                                    scene bg city_fest
+
+                                    " The city at night is a pleasant sight for your eyes. Its lights shine like little stars all over the street, people are happy to talk and dance to the music. You joined them and began to move under the quick beats of the tambourines. It felt so nice and peaceful. You don't remember when was the last time when you felt so happy, but you need to go back to the old man's house."
+
+                                    jump Return_Outsk
+                            
+                                "Go back to the man's house":
+                                    jump Return_Outsk
+label Return_Outsk:
+    scene bg outsk_house_night
+    "You returned to the old man's house and slept there until morning. Waking up, you began to look for a man and you found him in the armchair."
+
+    show y 
+    y "Good morning."
+
+    show om 
+    om "Good morning, had a good time?"
+
+    "You nod."
+
+    show om 
+    om "I remember the days when I came to this city... I danced every night in the main square until I got too old and stiff for it (sights)."
+
+    show y 
+    y "I will go the last time to the city and then I will leave."
+
+    show om
+    om " It would be better if you leave now, but I understand...Take care of you."
+
+    show y 
+    y "You too, old man, you too."
+
+    jump Leaving_City
+
+label Leaving_City:
+    menu:
+        " Go to the city":
+            scene bg city_le
+            "You are back in the city, people are tired after the long night dances, but everyone looks happy."
+            "You start to wonder if you really should leave, or if you could stay a little longer and learn more about the city from its most prominent figure, the mayor."
+
+            menu:
+                "Leave the city":
+                    scene bg leave_city
+                    "You decided to follow the old man's advice, especially since there is something very suspicious about this place. You didn't like what you heard from the couple who left the city. The city is indeed wonderful, but it's not worth your safety."
+                    "You return home the same way you came here and continue your journey, finding special places around the world. Coming home you told your friends about the city, but they did not believe you. Well, in their place, you would not believe in your story either."
+
+                    "THE END"
+
+                    jump try_again_or_give_up
+                
+                "Ask where you can find the mayor":
+                    scene bg speak_people
+                    "You approach a citizen in order to find the mayor."
+
+                    show y 
+                    y "Excuse me, could you tell me where I can find the mayor?"
+
+                    show lm
+                    lm "Ah, yes, you see, go to the main square and then turn right, at the end of the street you will see the mayor's residence."
+
+                    jump Mayor_House
+
+
+
+
+
+
 
 label try_again_or_give_up:
     scene bg game_over
