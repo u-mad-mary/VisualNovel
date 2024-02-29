@@ -14,9 +14,9 @@ define mn_r = Character("The Man", color = "#7f7773") # the man from the right t
 define muz_m = Character("The Man", color = "#debf59") # the museum's owner
 define cr = Character("Creepy Man", color = "#75524d") # the mayor's helper
 define pn = Character("Painter", color = "#505389") # painter from left trope
-define sw = ("Woman", color ="#721572") # woman from left trope (sales food), is very nice
-define am =("Man", color ="#778fbd")  # another man (is worried)
-define aw = ("Woman", color ="#ac7eac") # another woman (is worried)
+define sw = Character("Woman", color ="#721572") # woman from left trope (sales food), is very nice
+define am = Character("Man", color ="#778fbd")  # another man (is worried)
+define aw = Character("Woman", color ="#ac7eac") # another woman (is worried)
 
 
 default sex = 0
@@ -40,18 +40,15 @@ image bg enter_yes_no = "images/enter_yes_no.png"
 image bg cave = "images/cave.png"
 image bg city_poppy = "images/city_poppy.png"
 image bg no_cave = "images/no_cave.png"
-image bg game_over = "images/game_over.jpg"
+image bg game_over = "images/game_over.png"
 image bg poppy_f = "images/poppy_f.png"
 image bg choose_direction = "choose_direction.png"
 image bg city_r = "images/city_r.png"
-image bg city_le = "images/city_le.jpg"
-image bg city_str = "images/city_str.jpg"
-image bg outsk_house = "images/outsk_house.jpg"
-image bg choose_city_right = "images/choose_city_right.jpg"
-image bg parents_child = "images/parents_child.jpg"
-image bg man_eye = "images/man_eye.jpg"
-image bg choice_city_left = "images/choice_city_left.jpg"
-image bg sales_w = "images/sales_w.jpg"
+image bg city_le = "images/city_le.png"
+image bg city_str = "images/city_str.png"
+image bg parents_child = "images/parents_child.png"
+image bg man_eye = "images/man_eye.png"
+image bg sales_w = "images/sales_w.png"
 image bg painter = "images/painter.jpg"
 image bg choose_city_food = "images/choose_city_food.jpg"
 image bg city_view = "images/city_view.jpg"
@@ -69,7 +66,7 @@ image bg city_fest = "images/city_fest.jpg"
 image bg outsk_house_night = "images/outsk_house_night.jpg"
 image bg leave_city = "images/leave_city.jpg"
 image bg speak_people = "images/speak_people.jpg"
-image bg muz = "images/muz.jpg"
+image bg muz = "images/muz.png"
 image bg mayor_house = "images/mayor_house.jpg"
 image bg girl_dr = "images/girl_dr.jpg"
 image bg boy1 = "images/boy1.jpg"
@@ -217,10 +214,7 @@ label City_Right:
             jump Go_To_The_Museum        
     
 
-label Left:
-    scene bg city_le
-    "You walked on the left road."
-    scene bg choice_city_left
+label City_Left:
     "Here you see a woman who sells different types of food, she looks very lively and talks actively with other people." 
     "On the other hand there is a painter with a sad expression on his face. He draws children who play in front of a flower shop."
     
@@ -1179,7 +1173,6 @@ label Agree_Stay:
 
 label Outskirts:
     "After some time you find a house near the mountains."
-    scene bg outsk_house
     $ alertness += 1
     "You come closer to its door."
     scene bg door
@@ -1364,8 +1357,8 @@ label Open_Door:
 
                     "The man holds the woman's hand."
 
-                    menu:
-                        "Listen closer":
+                    # menu:
+                    #     "Listen closer":
 
                     show am 
                     am "We need to leave as fast as possible..."
