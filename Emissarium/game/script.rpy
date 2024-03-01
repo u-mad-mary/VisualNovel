@@ -66,35 +66,34 @@ image bg outsk_house_night = "images/outsk_house_night.png"
 image bg leave_city = "images/leave_city.png"
 image bg speak_people = "images/speak_people.png" 
 image bg muz = "images/muz.png"
-image bg mayor_house = "images/mayor_house.jpg"
+image bg mayor_house = "images/mayor_house.png"
 image bg girl_dr = "images/girl_dr.png"
 image bg boy1 = "images/boy1.png"
-image bg muz_man = "images/muz_man.jpg"
-image bg hall = "images/hall.jpg"
-image bg stay_examine = "images/stay_examine.jpg"
-image bg gb_room = "images/gb_room.jpg"
-image bg kidd = "images/kidd.jpg"
-image bg choose_art = "images/choose_art.jpg"
-image bg renaissance = "images/renaissance.jpg"
+image bg muz_man = "images/muz_man.png"
+image bg choose_art = "images/choose_art.png"
+image bg renaissance = "images/renaissance.jpg" #done
 image bg art_gogh = "images/art_gogh.jpg"
-image bg contemp = "images/contemp.jpg"
-image bg mayor = "images/mayor.jpg"
-image bg saveKid_sleep = "images/saveKid_sleep.jpg"
+image bg contemp = "images/contemp.png" 
+image bg hall = "images/hall.png"
+image bg gb_room = "images/gb_room.png"
+image bg kidd = "images/kid.png"
+image bg mayor = "images/mayor.png"
+image bg saveKid_sleep = "images/saveKid_sleep.png"
 image bg desk = "images/desk.png" 
-image bg go_basement = "images/go_basement.jpg"
-image bg ruins = "images/ruins.jpg"
+image bg go_basement = "images/go_basement.png"
+image bg ruins = "images/ruins.png"
 image bg sofa_2 = "images/sofa_2.png"
-image bg fest_walk = "images/fest_walk.jpg"
-image bg examine = "images/examine.jpg"
-image bg proceed = "images/proceed.jpg"
-image bg cave_noCave = "images/cave_noCave.jpg"
-image bg basement = "images/basement.jpg"
+image bg examine = "images/examine.png"
+image bg proceed = "images/proceed.png"
+image bg cave_noCave = "images/cave_noCave.png"
+image bg basement = "images/basement.png"
 image bg north_cave = "images/north_cave.png"
 
 image safe_closed = "images/safe_closed.png"
 image safe_open = "images/safe_open.png"
 image key_inside = "images/key_inside.png"
 image bg room = "images/room.png"
+
 
 
 
@@ -170,7 +169,6 @@ label City:
     "You have looked in the face of every passing citizen and on each ones face you have seen a smile, everyone looked so happy that it makes you alarmed. How can a city exist inside a mountain? And how it can be so prosperous? It makes no sense. "
     "In order to explore the city and find more about it choose where to go."
     menu City_Directions:
-        set menuset
         "Right":
             scene bg city_r
             "You decided to turn right."
@@ -328,7 +326,6 @@ label Talk_To_The_Parents:
     "They certainly hide something, but you understand that the man will not tell you anything and will not let his wife speak either. So, you have only one choice, to look for the answers from the mayor."
     y "Where can I find the mayor?"
     m "See the building at the end of the street? Go right there."
-    ### HERE MENU
     jump Mayor_House
 
 label Talk_To_The_Man_R:
@@ -338,7 +335,7 @@ label Talk_To_The_Man_R:
     
     y "I am de..ahem..deeply sorry, sir...may I ask you why you're in such a condition? Can I help you? (carefully)"
     "He looked you straight in the eyes and put his hands on your shoulders. You could feel his pain gripping you from the inside."
-    show mn_r
+    
     mn_r "I need to go...I can't stay here..How...(sobs)...How could they do this to an innocent soul... (mumbles)"
     "For a moment he came to his senses and looked at you with pity, after patting your shoulders he returned to follow his path...to the north..."
     "You didn't fully realize what was going on, but one thing was clear, you shouldn't disturb this person anymore."
@@ -350,7 +347,7 @@ label Go_To_The_Museum:
     "You enter the building and see the owner of the museum."
     menu:
         "Speak with the owner":
-            scene bg muz_m
+            scene bg muz_man
              
             y " Hello, I suppose that I got to the right place to ask questions about this city?"
             
@@ -411,7 +408,6 @@ label Mayor_House:
 
 label mayor_child_dialog:
         menu ask_city: 
-            set menuset
 
             "Give [pronoun_3] an apple" if apples:
                  
@@ -436,7 +432,7 @@ label mayor_child_dialog:
                         
                         y "Yes,sure. Let me help you."
                         "You help [pronoun_3] pack [pronoun_1] things and then go for a walk."
-                        scene bg fest_walk
+                        scene bg choose_direction
                         "You once again see the streets you walked on not long time ago, the festively decorated houses, people having fun."
                         "On the walk [pronoun_2] points at different places on the street and starts to tell you about people living there."
                         
@@ -493,8 +489,9 @@ label mayor_child_dialog:
 
                         menu see_house:
                             "Take a look around":
-                                scene bg stay_examine
+                                # generate the interior of the house HERE
                                 menu:
+                                    set menuset
                                     "Stay here":
                                         scene bg hall
                                         "The Mayor's child comes down the stairs with [pronoun_1] father."
@@ -963,7 +960,10 @@ label Painting_Skills:
             y "...the absract art."
             "You started to tell [pronoun_3] about the abstract art, that the world can be painted not only as we see it but also how we feel it. You took out your phone to show [pronoun_3] some pictures of the artworks of that kind and you noticed that there is no signal. It was expected. Fortunately, you had some photos of abstract art that ypu have seen in your journeys so you could show them."
             "You see that [pronoun_2] listened to you very attentlively and persorbed all the information you gave to [pronoun_3]."
-
+    if sex == 1:
+        scene bg girl_dr
+    else:
+        scene bg boy1
     "After you are done talking, [pronoun_2] looks at you with a sad expression. "
     
     y "What happened?"
@@ -1021,7 +1021,6 @@ label Mayor_Child_Choice:
 
                             scene bg mayor
                             "He looks at you with disgrace.You noticed two huge men behind him."
-                            show cr
                             cr "Mayor, what should we do with this rat?"
                             
                             "The Mayor's gaze is full of venom. "
@@ -1181,8 +1180,6 @@ label Agree_Stay:
                         "Sometimes you missed your old days when you traveled around the world, but what if you did all this journey just to get here? What if this place is your destiny?"
                         "It seems so."
 
-                        # INSERT LATER AN IMAGE
-
                         "The End."
                         jump try_again_or_give_up
 
@@ -1190,7 +1187,7 @@ label Agree_Stay:
                         scene bg north_cave
                         "It's midnight, the man came back after accompanying some people to the northern cave and shortly falls asleep in his room."
                         "You took the lantern that the old man left on the table and headed towards the cave. You started to delve into it. It didn't seem special at all compared to the one that you entered before. Well, it didn't until you started hearing screams, you wanted to turn around and leave this place immediately, but you were knocked down by a blow to the head. "
-                        ##### INSERT IMAGE
+                        scene bg basement
                         "You woke, tied up in a dark place, you supposed that it is the north cave. You see the old man from the outskirts and the mayor. "
                         "The Mayor sees that you've come to your senses."
                          
@@ -1223,9 +1220,7 @@ label Agree_Stay:
                                         jump Ending_Knife
 
     label Ending_Knife:
-        # INSERT IMAGE 
         "The mayor pulls a knife from his belt and stabs you several times in the chest. You feel your soul being torn to pieces with every blow. Your blood colors the floor red, it was the same as the color of the poppy field that you saw entering the city ... It becomes very cold, life leaves your body with every breath to the last one."
-        # INSERT IMAGE 
         "THE END"
         jump try_again_or_give_up
 
@@ -1254,6 +1249,7 @@ label Outskirts:
 
             menu:
                 "Leave old man's house":
+                    scene bg choose_direction
                     "You go back to the city."
                     jump City_Directions
                 
@@ -1332,7 +1328,6 @@ label Outskirts:
                                                          
                                                         y "I want to get the answers to my questions and if you or the other citizens won't tell me, then I will ask the mayor directly."
 
-
                                             
                                             else:
                                                 menu:
@@ -1365,18 +1360,13 @@ label Outskirts:
                                                                 jump Stay_The_Night_Outskirts                     
 
 
-                                                # CHECK IF THE PEREHOD WORKS
-
-
                                             menu:
                                                 "Tell him that you will find out":
                                                      
                                                     y "Well, I think that in this city I will find someone who would answer my questions honestly."
-
                                                      
                                                     om "It is a really bad ideea...Don't bother the citizens, ask the mayor directly all the questions reqarding the city, he is the only one who could provide you information...If he wants."
 
-                                                     
                                                     y "Where I can find him?"
 
                                                      
@@ -1506,7 +1496,7 @@ label Leaving_City:
 
                     y "Excuse me, could you tell me where I can find the mayor?"
 
-                    show lm
+                    
                     lm "Ah, yes, you see, go to the main square and then turn right, at the end of the street you will see the mayor's residence."
 
                     jump Mayor_House
@@ -1517,7 +1507,6 @@ label try_again_or_give_up:
     "This is the end of your journey..."
     menu:
         "Try Again":
-            $ persistent._clear(progress=True)
-            call start
+            $ renpy.full_restart()
         "Give Up":
             $ renpy.full_restart()
