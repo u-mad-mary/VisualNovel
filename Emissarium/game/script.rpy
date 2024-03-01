@@ -50,7 +50,7 @@ image bg parents_child = "images/parents_child.png"
 image bg man_eye = "images/man_eye.png"
 image bg sales_w = "images/sales_w.png"
 image bg painter = "images/painter.png"
-image bg choice_food = "images/choice_food.png" # done from here
+image bg choice_food = "images/choice_food.png"
 image bg tea = "images/tea.png"
 image bg apple = "images/apple.png"
 image bg food = "images/food.png"
@@ -64,11 +64,11 @@ image bg door_ins = "images/door_ins.png"
 image bg city_fest = "images/city_fest.png"
 image bg outsk_house_night = "images/outsk_house_night.png"
 image bg leave_city = "images/leave_city.png"
-image bg speak_people = "images/speak_people.png" # to here
-image bg muz = "images/muz.jpg"
+image bg speak_people = "images/speak_people.png" 
+image bg muz = "images/muz.png"
 image bg mayor_house = "images/mayor_house.jpg"
-image bg girl_dr = "images/girl_dr.jpg"
-image bg boy1 = "images/boy1.jpg"
+image bg girl_dr = "images/girl_dr.png"
+image bg boy1 = "images/boy1.png"
 image bg muz_man = "images/muz_man.jpg"
 image bg hall = "images/hall.jpg"
 image bg stay_examine = "images/stay_examine.jpg"
@@ -80,10 +80,10 @@ image bg art_gogh = "images/art_gogh.jpg"
 image bg contemp = "images/contemp.jpg"
 image bg mayor = "images/mayor.jpg"
 image bg saveKid_sleep = "images/saveKid_sleep.jpg"
-image bg desk = "images/desk.png" # done
+image bg desk = "images/desk.png" 
 image bg go_basement = "images/go_basement.jpg"
 image bg ruins = "images/ruins.jpg"
-image bg sofa_2 = "images/sofa_2.png" # done
+image bg sofa_2 = "images/sofa_2.png"
 image bg fest_walk = "images/fest_walk.jpg"
 image bg examine = "images/examine.jpg"
 image bg proceed = "images/proceed.jpg"
@@ -124,13 +124,13 @@ label cave:
         scene bg your_character_m
     else:
         scene bg your_character_w
-    # Add a scene for the lower text
+
     "It’s a sunny spring morning. You woke up in a good mood and with a lot of energy, because today is the day when you will roam the mountains to find something special."
-    # Add a scene for the lower text
+
     "You have arrived at your destination and started wandering around. After some time, you decided to go higher and finally began to see something unusual. There was a contrasting spot in the snow-white landscape of the mountains, so you went there."
     scene bg enter_yes_no
     menu:
-        # Add a scene for the lower text
+
         "You found a cave, but it doesn't look like a normal one, at its end you could see a light, as if it was passing through another part of the mountain. Enter the cave?"
         "Yes":
             scene bg cave
@@ -410,7 +410,7 @@ label Mayor_House:
             jump mayor_child_dialog
 
 label mayor_child_dialog:
-        menu ask_city: ########HERE MAYOR's CHILD 
+        menu ask_city: 
             set menuset
 
             "Give [pronoun_3] an apple" if apples:
@@ -894,7 +894,6 @@ label Take_Child:
 
         
         y "What about you? Did you not want to leave?"
-
          
         char "I don't deserve it..."
 
@@ -1417,49 +1416,50 @@ label Open_Door:
 
                     "The man holds the woman's hand."
 
-                    # menu:
-                    #     "Listen closer":
-
-                    am "We need to leave as fast as possible..."
- 
-                    aw "(crying) How could they treat a child like this?(sobs) How could all these people live without remorse after seeing how miserable it...he is treated?!"
-
-                    om "Calm down for a little bit, we are not alone..."
-
-                    "The couple looks at you and become silent. The house's owner addresses to you."
-
-                    om "I will go out for a while, to help them leave. You can go with me."
-
-                    "You four go to a cave not far away from the man's house, the couple enters the cave."
-
-                     
-                    om "I will escort them to the exit, you can take care of yourself till my return."
-
+                    # changed identation
                     menu:
-                        "Ask if you should go with them":
-                             
-                            y "Shouldn't I go with you now in order to leave the city?"
+                        "Listen closer":
 
-                             
-                            om "No. You will leave tomorrow's morning through the path you entered here."
+                            am "We need to leave as fast as possible..."
+        
+                            aw "(crying) How could they treat a child like this?(sobs) How could all these people live without remorse after seeing how miserable it...he is treated?!"
+
+                            om "Calm down for a little bit, we are not alone..."
+
+                            "The couple looks at you and become silent. The house's owner addresses to you."
+
+                            om "I will go out for a while, to help them leave. You can go with me."
+
+                            "You four go to a cave not far away from the man's house, the couple enters the cave."
+
+                            
+                            om "I will escort them to the exit, you can take care of yourself till my return."
 
                             menu:
-                                "Go to the festival":
-                                     
-                                    y "I will go to the festival and then come back."
+                                "Ask if you should go with them":
+                                    
+                                    y "Shouldn't I go with you now in order to leave the city?"
 
                                     
-                                    "Fine, take care to not get into trouble."
+                                    om "No. You will leave tomorrow's morning through the path you entered here."
 
-                                    "You go back to the city to enjoy the festival before you take your leave."
-                                    scene bg city_fest
+                                    menu:
+                                        "Go to the festival":
+                                            
+                                            y "I will go to the festival and then come back."
 
-                                    " The city at night is a pleasant sight for your eyes. Its lights shine like little stars all over the street, people are happy to talk and dance to the music. You joined them and began to move under the quick beats of the tambourines. It felt so nice and peaceful. You don't remember when was the last time when you felt so happy, but you need to go back to the old man's house."
+                                            
+                                            "Fine, take care to not get into trouble."
 
-                                    jump Return_Outsk
-                            
-                                "Go back to the man's house":
-                                    jump Return_Outsk
+                                            "You go back to the city to enjoy the festival before you take your leave."
+                                            scene bg city_fest
+
+                                            " The city at night is a pleasant sight for your eyes. Its lights shine like little stars all over the street, people are happy to talk and dance to the music. You joined them and began to move under the quick beats of the tambourines. It felt so nice and peaceful. You don't remember when was the last time when you felt so happy, but you need to go back to the old man's house."
+
+                                            jump Return_Outsk
+                                    
+                                        "Go back to the man's house":
+                                            jump Return_Outsk
 label Return_Outsk:
     scene bg outsk_house_night
     "You returned to the old man's house and slept there until morning. Waking up, you began to look for a man and you found him in the armchair."
@@ -1472,16 +1472,13 @@ label Return_Outsk:
 
     "You nod."
 
-     
     om "I remember the days when I came to this city... I danced every night in the main square until I got too old and stiff for it (sights)."
-
      
     y "I will go the last time to the city and then I will leave."
 
     
     om " It would be better if you leave now, but I understand...Take care of you."
-
-     
+ 
     y "You too, old man, you too."
 
     jump Leaving_City
@@ -1507,7 +1504,6 @@ label Leaving_City:
                     scene bg speak_people
                     "You approach a citizen in order to find the mayor."
 
-                     
                     y "Excuse me, could you tell me where I can find the mayor?"
 
                     show lm
