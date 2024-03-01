@@ -1463,9 +1463,11 @@ label Open_Door:
 label Return_Outsk:
     scene bg outsk_house_night
     "You returned to the old man's house and slept there until morning. Waking up, you began to look for a man and you found him in the armchair."
+
      
     y "Good morning."
- 
+
+     
     om "Good morning, had a good time?"
 
     "You nod."
